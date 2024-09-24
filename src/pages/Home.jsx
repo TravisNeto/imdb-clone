@@ -8,10 +8,16 @@ const Home = () => {
 
   const apiKey = '4373236e';
 
-  const searchMovies = async (e) => {
-    e.preventDefault();
-    const response = await axios.get(`http://www.omdbapi.com/?s=${searchTerm}&apikey=${apiKey}`);
-    setMovies(response.data.Search || []);
+  const searchMovies = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(
+        `http://www.omdbapi.com/?s=${searchTerm}&apikey=${apiKey}`
+      );
+      setMovies(response.data.Search || []);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
